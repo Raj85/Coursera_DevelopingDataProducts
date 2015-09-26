@@ -20,7 +20,7 @@ shinyServer(function(input, output) {
     colnames(term.matrix) <- c("1st Text","2nd Text")
     par(mfrow=c(2,1))
     set.seed(103)
-    comparison.cloud(term.matrix,max.words=100,random.order=FALSE, colors=brewer.pal(8,"Dark2"))
+    comparison.cloud(term.matrix,max.words=Inf,random.order=FALSE, colors=brewer.pal(8,"Dark2"))
     set.seed(786)
     commonality.cloud(term.matrix,max.words=Inf,random.order=FALSE)
     })
