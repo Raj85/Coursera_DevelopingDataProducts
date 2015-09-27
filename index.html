@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Comparison and Commonality Word Cloud</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Comparison and Commonality Word Cloud">
+  <meta name="author" content="Rajesh Santhanakrishnan">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Comparison and Commonality Word Cloud</h1>
+    <h2></h2>
+    <p>Rajesh Santhanakrishnan<br/>Data Enthusiast</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h1>The Comparison and COmmonality Word Cloud</h1>
+  </hgroup>
+  <article data-timings="">
+    <h3>Developping Data Products Course Project</h3>
+
+<p>Created by Rajesh S</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>The Idea</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>I was listening to the recent Presidential debate and thought it would be interesting to compare the speech transcript of two popular presidential candiates and see what they spoke about in general and what were some of the common topics that they spoke about.</p>
+
+<p>Thats when I decided to work on this project of comparing two texts and generating a word cloud that can give me more insights into the speech.</p>
+
+<p>Stating by Loading </p>
+
+<pre><code class="r">library(tm)
+</code></pre>
+
+<pre><code>## Loading required package: NLP
+</code></pre>
+
+<pre><code class="r">library(wordcloud)
+</code></pre>
+
+<pre><code>## Loading required package: RColorBrewer
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>The R Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The below explains the method that was use in the shiny app for comparing any two texts to find commonality and also compare the two texts.</p>
+
+<pre><code class="r">tmpText = data.frame(c(&quot;course and meets its Love&quot;,&quot; trusted each Love&quot;))
+ds = DataframeSource(tmpText)
+corp = Corpus(ds)
+corp = tm_map(corp,removePunctuation)
+corp = tm_map(corp,tolower)
+corp = tm_map(corp,removeNumbers)
+corp = tm_map(corp, removeWords, stopwords(&quot;english&quot;))
+corp = tm_map(corp, PlainTextDocument)
+term.matrix &lt;- TermDocumentMatrix(corp)
+term.matrix &lt;- as.matrix(term.matrix)
+colnames(term.matrix) &lt;- c(&quot;Text1&quot;,&quot;Text2&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>The word Cloud</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The Left hand side could shows us the comparison cloud for the two texts and the righ hand side graph shows us the commonality cloud. Below shown are sample clouds</p>
+
+<pre><code class="r">par(mfrow=c(1,2))
+set.seed(103)
+comparison.cloud(term.matrix,max.words=10,random.order=FALSE,colors=brewer.pal(8,&quot;Dark2&quot;))
+set.seed(786)
+commonality.cloud(term.matrix,max.words=10,random.order=FALSE,colors=brewer.pal(8,&quot;Dark2&quot;))
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Development</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Using the shiny app compare andy two songs or speeches or articles ..etc to find out commonality and comparisons between the texts.</li>
+<li><a href="https://wordcloudcousera0925.shinyapps.io/Coursera_DevelopingDataProducts">https://wordcloudcousera0925.shinyapps.io/Coursera_DevelopingDataProducts</a> is the app!</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Thank you!!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>I hope this helps you now and in the future to compare any texts and find interesting patterns.</p></li>
+<li><p>I am hoping to expand on this by adding more features and functionality to better server the needs of users.</p></li>
+<li><p>Please keep watching for new features in the future!!!</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='The Comparison and COmmonality Word Cloud'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The Idea'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='The R Code'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='The word Cloud'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Development'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Thank you!!'>
+         6
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
