@@ -1,6 +1,6 @@
 library(shiny)
 shinyUI(bootstrapPage(fluidPage(
-  headerPanel("Comparison and Commonality Word cloud Generator"),
+  headerPanel("Comparison and Commonality Word Cloud Generator"),
   sidebarPanel(
                   textInput("text1", label = "Enter your 1st text", value = "And we will safeguard America's own security against those who threaten our citizens, our friends, and our interests. Look at Iran. Through the power of our diplomacy, a world that was once divided about how to deal with Iran's nuclear program now stands as one. The regime is more isolated than ever before; its leaders are faced with crippling sanctions, and as long as they shirk their responsibilities, this pressure will not relent. Let there be no doubt: America is determined to prevent Iran from getting a nuclear weapon, and I will take no options off the table to achieve that goal. But a peaceful resolution of this issue is still possible, and far better, and if Iran changes course and meets its obligations, it can rejoin the community of nations.
 The renewal of American leadership can be felt across the globe. Our oldest alliances in Europe and Asia are stronger than ever. Our ties to the Americas are deeper. Our iron-clad commitment to Israel's security has meant the closest military cooperation between our two countries in history. We've made it clear that America is a Pacific power, and a new beginning in Burma has lit a new hope. From the coalitions we've built to secure nuclear materials, to the missions we've led against hunger and disease; from the blows we've dealt to our enemies; to the enduring power of our moral example, America is back.
@@ -11,8 +11,21 @@ The renewal of American leadership can be felt across the globe. Our oldest alli
               ),
   
   mainPanel(
-              helpText('Top graph is the Comparison Cloud and the bottom graph is the Commonality Cloud'),   
-              plotOutput("cloud",width = "100%", height = "1000px" )
+    
+    strong("Word cloud instructions"),
+    br(),
+    p("Wait until the app is fully loaded , then just copy and paste either two songs or speeches or any two text of interest that you would like to compare and also find any common word patterns."),
+    p("Use the text box 1 to enter your first text and text box 2 to enter your second text (Select all the default text and overwrite with the new text)"),
+    br(),
+    p("Then click generate cloud action button (In this case the there is no reactive code implemented so even before you click generate cloud the program might run)"),
+    tags$ol(
+      tags$li("The First Graph shows the Comparison Cloud"), 
+      tags$li("The second graph shows the Commonality Cloud")
+    ),
+    br(),
+    p("All the code is available on my github:", a("https://github.com/Raj85/Coursera_DevelopingDataProducts"), " where a detailed method used is listed"),
+    
+    plotOutput("cloud",width = "100%", height = "1000px" )
            )
   
 )))
