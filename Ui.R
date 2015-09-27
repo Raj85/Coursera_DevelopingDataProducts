@@ -24,6 +24,7 @@ The renewal of American leadership can be felt across the globe. Our oldest alli
     ),
     br(),
     p("All the code is available on my github:", a("https://github.com/Raj85/Coursera_DevelopingDataProducts"), " where a detailed method used is listed"),
+    p("Please Ignore the Error msg when you clear either one fo the text boxes", a("Error:invalid 'cex' value")),
     
     plotOutput("cloud",width = "100%", height = "1000px" )
            )
